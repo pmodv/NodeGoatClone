@@ -74,6 +74,7 @@ jobs:
           # - Default branch status from git and GitHub environment
           # - Changed files from git commit
           socketcli \
+            --reach \
             --target-path $GITHUB_WORKSPACE \
             --scm github \
             --pr-number $PR_NUMBER
