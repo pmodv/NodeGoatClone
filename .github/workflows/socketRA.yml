@@ -35,19 +35,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-
-      - name: Install uv
-        run: |
-          curl -LsSf https://astral.sh/uv/install.sh | sh
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
-
-      - name: Verify dependencies
-        run: |
-          node --version
-          npm --version
-          npx --version
-          uv --version
-
+      
       - name: Install Socket CLI
         run: pip install socketsecurity --upgrade
       
@@ -65,6 +53,7 @@ jobs:
           fi
           
           # Run Socket CLI with minimal required parameters
+          # ... BUT include --reach for RA
           # The CLI automatically detects:
           # - Repository name from git
           # - Branch name from git
@@ -74,11 +63,7 @@ jobs:
           # - Default branch status from git and GitHub environment
           # - Changed files from git commit
           socketcli \
-            --reach --reach-continue-on-install-errors \
+            --reach \
             --target-path $GITHUB_WORKSPACE \
             --scm github \
             --pr-number $PR_NUMBER
-
-
-
-
